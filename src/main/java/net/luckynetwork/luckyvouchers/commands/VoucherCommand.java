@@ -38,7 +38,10 @@ public class VoucherCommand implements CommandExecutor, TabCompleter {
         }
 
         if(args.length == 0){
-            // Send help messages.
+            sender.sendMessage(this.color("&e&lLuckyVouchers &7- by aglerr"));
+            sender.sendMessage(this.color("&e- /vouchers list &7- shows vouchers list"));
+            sender.sendMessage(this.color("&e- /vouchers reload &7- reload the configuration"));
+            sender.sendMessage(this.color("&e- /vouchers give <player> <voucher> <amount> &7- give player a voucher"));
             return true;
         }
 
@@ -56,7 +59,7 @@ public class VoucherCommand implements CommandExecutor, TabCompleter {
         if(!(sender.hasPermission("luckyvouchers.admin"))) return null;
 
         if(args.length == 1){
-            return Arrays.asList("list", "reload");
+            return Arrays.asList("list", "reload", "give");
         }
 
         if(args[0].equalsIgnoreCase("give")){

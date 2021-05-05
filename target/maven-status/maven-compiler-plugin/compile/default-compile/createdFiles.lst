@@ -4,6 +4,7 @@ net\luckynetwork\luckyvouchers\inventory\handlers\FastInv.class
 net\luckynetwork\luckyvouchers\commands\subcommands\ReloadCommand.class
 net\luckynetwork\luckyvouchers\managers\VoucherManager.class
 net\luckynetwork\luckyvouchers\listeners\VoucherInteract.class
+net\luckynetwork\luckyvouchers\commands\subcommands\GiveCommand.class
 net\luckynetwork\luckyvouchers\objects\Voucher.class
 net\luckynetwork\luckyvouchers\abstraction\SubCommand.class
 net\luckynetwork\luckyvouchers\inventory\handlers\FastInvManager.class
