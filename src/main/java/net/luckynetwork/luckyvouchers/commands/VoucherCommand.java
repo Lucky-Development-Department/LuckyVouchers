@@ -2,6 +2,7 @@ package net.luckynetwork.luckyvouchers.commands;
 
 import net.luckynetwork.luckyvouchers.LuckyVouchers;
 import net.luckynetwork.luckyvouchers.abstraction.SubCommand;
+import net.luckynetwork.luckyvouchers.commands.subcommands.GiveCommand;
 import net.luckynetwork.luckyvouchers.commands.subcommands.ListCommand;
 import net.luckynetwork.luckyvouchers.commands.subcommands.ReloadCommand;
 import org.bukkit.Bukkit;
@@ -25,6 +26,7 @@ public class VoucherCommand implements CommandExecutor, TabCompleter {
 
         subCommandMap.put("list", new ListCommand());
         subCommandMap.put("reload", new ReloadCommand());
+        subCommandMap.put("give", new GiveCommand());
     }
 
     @Override
@@ -55,6 +57,10 @@ public class VoucherCommand implements CommandExecutor, TabCompleter {
 
         if(args.length == 1){
             return Arrays.asList("list", "reload");
+        }
+
+        if(args[0].equalsIgnoreCase("give")){
+            return subCommandMap.get("give").parseTabCompletions(plugin, sender, args);
         }
 
         return null;

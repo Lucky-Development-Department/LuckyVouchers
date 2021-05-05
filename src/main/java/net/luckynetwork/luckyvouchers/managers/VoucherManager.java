@@ -34,6 +34,10 @@ public class VoucherManager {
         return namespacedKey;
     }
 
+    public List<String> getVoucherNameList(){
+        return new ArrayList<>(this.voucherMap.keySet());
+    }
+
     public Voucher getVoucher(String voucherName){
         return this.voucherMap.get(voucherName);
     }

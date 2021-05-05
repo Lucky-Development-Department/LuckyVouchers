@@ -32,7 +32,10 @@ public class LuckyVouchers extends JavaPlugin {
         PluginManager pm = Bukkit.getPluginManager();
         pm.registerEvents(new VoucherInteract(this), this);
 
-        this.getCommand("vouchers").setExecutor(new VoucherCommand(this));
+        VoucherCommand voucherCommand = new VoucherCommand(this);
+        this.getCommand("vouchers").setExecutor(voucherCommand);
+        this.getCommand("vouchers").setTabCompleter(voucherCommand);
+
 
     }
 
