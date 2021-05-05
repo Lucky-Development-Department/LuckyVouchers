@@ -1,0 +1,14 @@
+net\luckynetwork\luckyvouchers\LuckyVouchers.class
+net\luckynetwork\luckyvouchers\commands\VoucherCommand.class
+net\luckynetwork\luckyvouchers\inventory\handlers\FastInv.class
+net\luckynetwork\luckyvouchers\commands\subcommands\ReloadCommand.class
+net\luckynetwork\luckyvouchers\managers\VoucherManager.class
+net\luckynetwork\luckyvouchers\listeners\VoucherInteract.class
+net\luckynetwork\luckyvouchers\objects\Voucher.class
+net\luckynetwork\luckyvouchers\abstraction\SubCommand.class
+net\luckynetwork\luckyvouchers\inventory\handlers\FastInvManager.class
+net\luckynetwork\luckyvouchers\inventory\ConfirmationInventory.class
+net\luckynetwork\luckyvouchers\inventory\ListInventory.class
+net\luckynetwork\luckyvouchers\utils\ItemBuilder.class
+net\luckynetwork\luckyvouchers\commands\subcommands\ListCommand.class
+net\luckynetwork\luckyvouchers\inventory\handlers\FastInvManager$InventoryListener.class

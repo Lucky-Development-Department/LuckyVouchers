@@ -1,0 +1,9 @@
+name: LuckyVouchers
+version: 1.0
+api-version: 1.13
+main: net.luckynetwork.luckyvouchers.LuckyVouchers
+author: aglerr
+
+commands:
+  vouchers:
+    aliases: [voucher, lv, luckyvouchers]

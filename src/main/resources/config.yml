@@ -1,0 +1,31 @@
+vouchers:
+  7dfly:
+    item:
+      material: FEATHER
+      enchanted: true
+      name: "&e&l7-Day Fly Permission"
+      lore:
+        - ''
+        - ' &e&l[!] Perks: &f/is fly'
+        - ' &e&l[!] Duration: &f7 days.'
+        - ''
+        - '&7&o"This perks can give you ability'
+        - '&7&oto use &f&o/is fly &7&ocommand for'
+        - '&7&o7 days."'
+        - ''
+        - '&7&o(( &f&oRight click &7&oto redeem! ))'
+      flags:
+        - HIDE_ATTRIBUTES
+        - HIDE_ENCHANTS
+      permissionsCheck:
+        - superior.island.fly
+      failedCheck: "&cYou already have an island fly permission!"
+      commands:
+        - "lp user %player% permission settemp superior.island.fly true 7d"
+    message:
+      enabled: true
+      message:
+        - "&e&lVOUCHER &a/ You have redeemed &e7-days fly permission&a!"
+    sound:
+      enabled: true
+      name: ENTITY_PLAYER_LEVELUP
