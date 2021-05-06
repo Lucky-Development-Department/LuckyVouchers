@@ -2,6 +2,7 @@ package net.luckynetwork.luckyvouchers.commands.subcommands;
 
 import net.luckynetwork.luckyvouchers.LuckyVouchers;
 import net.luckynetwork.luckyvouchers.abstraction.SubCommand;
+import net.luckynetwork.luckyvouchers.inventory.ListInventory;
 import net.luckynetwork.luckyvouchers.managers.VoucherManager;
 import net.luckynetwork.luckyvouchers.objects.Voucher;
 import org.bukkit.Bukkit;
@@ -46,6 +47,18 @@ public class GiveCommand extends SubCommand {
     public void perform(LuckyVouchers plugin, CommandSender sender, String[] args) {
 
         VoucherManager voucherManager = plugin.getVoucherManager();
+        if(args.length == 2){
+            Player player = Bukkit.getPlayer(args[1]);
+            if(player == null){
+                sender.sendMessage(this.color("&cThat player is not online!"));
+                return;
+            }
+
+            ListInventory listInventory = new ListInventory(voucherManager.getVoucherList(), player);
+            listInventory.open(player);
+
+            return;
+        }
 
         if(args.length < 4){
             sender.sendMessage(this.color("&cUsage: /vouchers give <player> <voucher> [<amount>]"));

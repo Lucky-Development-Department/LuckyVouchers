@@ -21,7 +21,7 @@ public class ListCommand extends SubCommand {
         if(!(sender instanceof Player)) return;
         Player player = (Player) sender;
 
-        ListInventory listInventory = new ListInventory(plugin.getVoucherManager().getVoucherList());
+        ListInventory listInventory = new ListInventory(plugin.getVoucherManager().getVoucherList(), player);
         listInventory.open(player);
 
     }

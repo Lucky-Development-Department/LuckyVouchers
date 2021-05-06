@@ -10,24 +10,26 @@ import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataType;
 
 import javax.management.InvalidApplicationException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class VoucherManager {
 
     private final Map<String, Voucher> voucherMap = new HashMap<>();
     private final NamespacedKey namespacedKey;
+    private final ItemStack minionVoucherStack;
 
     private final LuckyVouchers plugin;
     public VoucherManager(LuckyVouchers plugin){
         this.plugin = plugin;
         namespacedKey = new NamespacedKey(plugin, "VoucherName");
+        minionVoucherStack = this.getMinionStack();
     }
 
     public NamespacedKey getNamespacedKey(){
@@ -94,6 +96,22 @@ public class VoucherManager {
 
     }
 
+    public ItemStack getMinionStack(){
+
+        ItemStack stack = new ItemStack(Material.ARMOR_STAND);
+
+        ItemMeta itemMeta = stack.getItemMeta();
+        itemMeta.setDisplayName(this.color("&e&lMinion Limit Increase &7(Right Click)"));
+        itemMeta.getPersistentDataContainer().set(namespacedKey, PersistentDataType.STRING, "minion");
+        itemMeta.setLore(this.color(Arrays.asList(" ", " &e&l[!] Perks: &fPlace More Minion", " ", "&7&o\"This perks can give you ability", "&7&oto add 1 more max minion", "&7&oto your account\"", " ", " &7&o(( &f&oRight-click &7&oto redeem ))")));
+        itemMeta.addEnchant(Enchantment.ARROW_INFINITE, 1, true);
+        itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+
+        stack.setItemMeta(itemMeta);
+        return stack;
+    }
+
     private String color(String message) {
         return ChatColor.translateAlternateColorCodes('&', message);
     }
@@ -101,5 +119,7 @@ public class VoucherManager {
     private List<String> color(List<String> strings) {
         return strings.stream().map(this::color).collect(Collectors.toList());
     }
+
+    public ItemStack getMinionVoucherStack() { return minionVoucherStack; }
 
 }

@@ -8,13 +8,12 @@ import java.util.List;
 
 public class ListInventory extends FastInv {
 
-    public ListInventory(List<Voucher> voucherList) {
-        super(54, "Vouchers List");
+    public ListInventory(List<Voucher> voucherList, Player player) {
+        super(54, "Vouchers List (" + player.getName() + ")");
 
         int slot = 0;
         for(Voucher voucher : voucherList){
             this.setItem(slot, voucher.getVoucherStack(), event -> {
-                Player player = (Player) event.getWhoClicked();
                 player.getInventory().addItem(voucher.getVoucherStack());
             });
 

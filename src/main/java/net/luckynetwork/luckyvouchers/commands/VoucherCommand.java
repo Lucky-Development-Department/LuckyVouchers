@@ -4,6 +4,7 @@ import net.luckynetwork.luckyvouchers.LuckyVouchers;
 import net.luckynetwork.luckyvouchers.abstraction.SubCommand;
 import net.luckynetwork.luckyvouchers.commands.subcommands.GiveCommand;
 import net.luckynetwork.luckyvouchers.commands.subcommands.ListCommand;
+import net.luckynetwork.luckyvouchers.commands.subcommands.MinionCommand;
 import net.luckynetwork.luckyvouchers.commands.subcommands.ReloadCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -27,6 +28,7 @@ public class VoucherCommand implements CommandExecutor, TabCompleter {
         subCommandMap.put("list", new ListCommand());
         subCommandMap.put("reload", new ReloadCommand());
         subCommandMap.put("give", new GiveCommand());
+        subCommandMap.put("giveminion", new MinionCommand());
     }
 
     @Override
@@ -59,11 +61,15 @@ public class VoucherCommand implements CommandExecutor, TabCompleter {
         if(!(sender.hasPermission("luckyvouchers.admin"))) return null;
 
         if(args.length == 1){
-            return Arrays.asList("list", "reload", "give");
+            return Arrays.asList("list", "reload", "give", "giveminion");
         }
 
         if(args[0].equalsIgnoreCase("give")){
             return subCommandMap.get("give").parseTabCompletions(plugin, sender, args);
+        }
+
+        if(args[0].equalsIgnoreCase("giveminion")){
+            return subCommandMap.get("giveminion").parseTabCompletions(plugin, sender, args);
         }
 
         return null;

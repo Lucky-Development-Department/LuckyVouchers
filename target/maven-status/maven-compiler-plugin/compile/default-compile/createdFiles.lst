@@ -1,8 +1,11 @@
+net\luckynetwork\luckyvouchers\commands\subcommands\MinionCommand.class
 net\luckynetwork\luckyvouchers\LuckyVouchers.class
 net\luckynetwork\luckyvouchers\commands\VoucherCommand.class
 net\luckynetwork\luckyvouchers\inventory\handlers\FastInv.class
+net\luckynetwork\luckyvouchers\listeners\MinionVoucher.class
 net\luckynetwork\luckyvouchers\commands\subcommands\ReloadCommand.class
 net\luckynetwork\luckyvouchers\managers\VoucherManager.class
+net\luckynetwork\luckyvouchers\inventory\ConfirmationMinionInventory.class
 net\luckynetwork\luckyvouchers\listeners\VoucherInteract.class
 net\luckynetwork\luckyvouchers\commands\subcommands\GiveCommand.class
 net\luckynetwork\luckyvouchers\objects\Voucher.class
