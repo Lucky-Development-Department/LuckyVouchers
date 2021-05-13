@@ -7,6 +7,7 @@ import net.luckperms.api.node.Node;
 import net.luckynetwork.luckyvouchers.LuckyVouchers;
 import net.luckynetwork.luckyvouchers.inventory.handlers.FastInv;
 import net.luckynetwork.luckyvouchers.utils.ItemBuilder;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -42,17 +43,18 @@ public class ConfirmationMinionInventory extends FastInv {
 
     private void handlePermissionUpgrade(LuckyVouchers plugin, Player player, User user, String removed, String added){
         LuckPerms api = plugin.getLuckPermsAPI();
-        CompletableFuture.runAsync(() -> {
-            user.data().remove(Node.builder(removed).build());
-            user.data().add(Node.builder(added).build());
 
-        }).thenAccept(result -> {
+        user.data().remove(Node.builder(removed).build());
+        user.data().add(Node.builder(added).build());
+
+        Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
 
             api.getUserManager().saveUser(user);
             player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 1);
             player.sendTitle(this.color("&a&lCompleted!"), this.color("&7We have successfully modified your minion data!"), 0, 40, 0);
 
         });
+
     }
 
     public ItemStack getDummyItem(){

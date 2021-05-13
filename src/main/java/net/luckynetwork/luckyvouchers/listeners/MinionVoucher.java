@@ -35,28 +35,6 @@ public class MinionVoucher implements Listener {
         this.plugin = plugin;
     }
 
-    @EventHandler(priority = EventPriority.MONITOR)
-    public void onPlayerJoin(PlayerJoinEvent event){
-        Player player = event.getPlayer();
-        if(player.isOp()) return;
-        User user = this.getUser(player.getUniqueId());
-
-        if(user == null){
-            System.out.println("[LuckyVouchers] DEBUG JOIN EVENT");
-            System.out.println("[LuckyVouchers] There is an error checking permission for " + player.getName());
-            System.out.println("[LuckyVouchers] With UUID: " + player.getUniqueId().toString());
-            return;
-        }
-
-        Bukkit.broadcastMessage("Max Minions: " + this.getMaxMinions(player));
-
-        if(this.getMaxMinions(player) == 0){
-            Bukkit.broadcastMessage("Adding permission to player!");
-            this.addDefaultPermission(user);
-        }
-
-    }
-
     @EventHandler
     public void onInteract(PlayerInteractEvent event){
         if(event.getHand() != EquipmentSlot.HAND) return;
@@ -99,7 +77,7 @@ public class MinionVoucher implements Listener {
                     return;
                 }
 
-                if(maxMinion == 20){
+                if(maxMinion >= 20){
                     player.sendMessage(this.color("&cYou are already on the max minion limits!"));
                     return;
                 }
@@ -112,10 +90,28 @@ public class MinionVoucher implements Listener {
         }
     }
 
+    @EventHandler(priority = EventPriority.MONITOR)
+    public void onPlayerJoin(PlayerJoinEvent event){
+        Player player = event.getPlayer();
+        if(player.isOp()) return;
+        User user = this.getUser(player.getUniqueId());
+
+        if(user == null){
+            System.out.println("[LuckyVouchers] DEBUG JOIN EVENT");
+            System.out.println("[LuckyVouchers] There is an error checking permission for " + player.getName());
+            System.out.println("[LuckyVouchers] With UUID: " + player.getUniqueId().toString());
+            return;
+        }
+
+        if(this.getMaxMinions(player) == 0){
+            this.addDefaultPermission(user);
+        }
+
+    }
+
     private void addDefaultPermission(User user){
-        LuckPerms api = plugin.getLuckPermsAPI();
-        CompletableFuture.runAsync(() -> user.data().add(Node.builder("minions.place.1").build()))
-                .thenAccept(result -> api.getUserManager().saveUser(user));
+        user.data().add(Node.builder("minions.place.1").build());
+        this.saveUser(user);
     }
 
     private User getUser(UUID uniqueId) {
@@ -123,6 +119,11 @@ public class MinionVoucher implements Listener {
         CompletableFuture<User> userFuture = userManager.loadUser(uniqueId);
 
         return userFuture.join();
+    }
+
+    private void saveUser(User user){
+        UserManager userManager = plugin.getLuckPermsAPI().getUserManager();
+        Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> userManager.saveUser(user));
     }
 
     private int getMaxMinions(Player player){
